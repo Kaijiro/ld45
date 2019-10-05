@@ -15,7 +15,7 @@ public class PlayerMovementController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector2 currentPosition = rigidBody.position;
         float horizontalInput = Input.GetAxis("Horizontal");
