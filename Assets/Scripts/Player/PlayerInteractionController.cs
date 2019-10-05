@@ -1,26 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerInteractionController : MonoBehaviour
 {
-    private Interactable _closestInteractable;
-    private float _closestInteractableDistance;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        _closestInteractable = null;
-        _closestInteractableDistance = 10000f;
-    }
-
     // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Jump"))
         {
             Vector3 playerPosition = transform.position;
+            Interactable closestInteractable = null;
+            var closestInteractableDistance = 10000f;
 
             Interactable[] interactables = FindObjectsOfType<Interactable>();
             foreach (Interactable interactable in interactables)
@@ -28,29 +17,24 @@ public class PlayerInteractionController : MonoBehaviour
                 float interactableDistance =
                     Vector3.Distance(interactable.GetComponent<Transform>().position, playerPosition);
                 
-                if (_closestInteractable == null)
+                if (closestInteractable == null)
                 {
-                    setInteractableAsClosest(interactable, interactableDistance);
+                    closestInteractable = interactable;
+                    closestInteractableDistance = interactableDistance;
                     continue;
                 }
                 
-                if (interactableDistance < _closestInteractableDistance)
+                if (interactableDistance < closestInteractableDistance)
                 {
-                    _closestInteractable = interactable;
-                    _closestInteractableDistance = interactableDistance;
+                    closestInteractable = interactable;
+                    closestInteractableDistance = interactableDistance;
                 }
             }
 
-            if (_closestInteractableDistance < _closestInteractable.radius)
+            if (closestInteractableDistance < closestInteractable.radius)
             {
-                _closestInteractable.OnInteract();
+                closestInteractable.OnInteract();
             }
         }
-    }
-
-    private Interactable setInteractableAsClosest(Interactable interactable, float interactableDistance)
-    {
-        _closestInteractable = interactable;
-        _closestInteractableDistance = interactableDistance;
     }
 }
