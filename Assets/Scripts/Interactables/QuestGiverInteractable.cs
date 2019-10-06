@@ -17,6 +17,7 @@ public class QuestGiverInteractable : TalkingInteractable
             if (playerInventory.Contains(quest.requiredObjectId))
             {
                 questDialogue = endQuestDialogue;
+                quest.isFinished = true;
             }
             else
             {

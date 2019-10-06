@@ -24,4 +24,12 @@ public class QuestLog : MonoBehaviour
     {
         return Quests.Contains(quest);
     }
+
+    public void FinishQuest(Quest quest)
+    {
+        if (Quests.Contains(quest))
+        {
+            quest.isFinished = true;
+        }
+    }
 }
