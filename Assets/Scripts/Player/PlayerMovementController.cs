@@ -24,14 +24,12 @@ public class PlayerMovementController : MonoBehaviour
         
         Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
         inputVector = Vector2.ClampMagnitude(inputVector, 1f); // Prevent diagonal movement to be faster than "classic" movement
-        Console.Out.Write("InputVector is => " + inputVector);
 
         Vector2 movementVector = inputVector * movementSpeed;
         Vector2 newPosition = currentPosition + movementVector;
 
         if (animator.GetBool(IsMoving) != (currentPosition == newPosition))
         {
-            Debug.Log("Set !");
             animator.SetBool(IsMoving, currentPosition == newPosition);
         }
 

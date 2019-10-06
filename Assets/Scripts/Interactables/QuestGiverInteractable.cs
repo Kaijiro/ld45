@@ -1,4 +1,6 @@
-﻿public class QuestGiverInteractable : TalkingInteractable
+﻿using UnityEngine;
+
+public class QuestGiverInteractable : TalkingInteractable
 {
     public QuestLog playerQuestLog;
     public Quest quest;

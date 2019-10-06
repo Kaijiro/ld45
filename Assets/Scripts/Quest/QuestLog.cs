@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class QuestLog : MonoBehaviour
 {
-    private List<Quest> Quests;
+    public List<Quest> Quests;
 
     private void Start()
     {
