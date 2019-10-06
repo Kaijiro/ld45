@@ -13,6 +13,7 @@ public class DialogueDisplayer : MonoBehaviour
     
     private Queue<string> sentences;
     private string talkerName;
+    private static readonly int IsOpen = Animator.StringToHash(("isOpen"));
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class DialogueDisplayer : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Jump") && animator.GetBool(("isOpen")))
+        if (Input.GetButtonDown("Jump") && animator.GetBool(IsOpen))
         {
             DisplayNextSentence();
         }
@@ -30,7 +31,7 @@ public class DialogueDisplayer : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-        animator.SetBool("isOpen", true);
+        animator.SetBool(IsOpen, true);
         nameText.text = dialogue.name;
         
         sentences.Clear();
@@ -58,10 +59,10 @@ public class DialogueDisplayer : MonoBehaviour
 
     private void EndDialogue()
     {
-        animator.SetBool("isOpen", false);
+        animator.SetBool(IsOpen, false);
     }
 
-    IEnumerator SentenceTypingCoroutine(string sentence)
+    private IEnumerator SentenceTypingCoroutine(string sentence)
     {
         dialogText.text = "";
         foreach (char character in sentence)

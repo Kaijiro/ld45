@@ -5,9 +5,8 @@ public class CameraFollowScript : MonoBehaviour
 
     public Transform targetToFollow;
     public float moveSpeed;
-
-    // Update is called once per frame
-    void Update()
+    
+    void LateUpdate()
     {
         if (targetToFollow != null)
         {

@@ -6,8 +6,9 @@ using UnityEngine;
 public class PlayerMovementController : MonoBehaviour
 {
     public float movementSpeed = 1f;
-    
+    public Animator animator;
     Rigidbody2D rigidBody;
+    private static readonly int IsMoving = Animator.StringToHash("isMoving");
 
     private void Awake()
     {
@@ -27,7 +28,13 @@ public class PlayerMovementController : MonoBehaviour
 
         Vector2 movementVector = inputVector * movementSpeed;
         Vector2 newPosition = currentPosition + movementVector;
-        
+
+        if (animator.GetBool(IsMoving) != (currentPosition == newPosition))
+        {
+            Debug.Log("Set !");
+            animator.SetBool(IsMoving, currentPosition == newPosition);
+        }
+
         rigidBody.MovePosition(newPosition);
     }
 }
